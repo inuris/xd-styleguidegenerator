@@ -1,5 +1,5 @@
 {
-    "id": "style_guide_generator",
+    "id": "f5ee2e9c",
     "name": "Style Guide Generator",
     "version": "1.0.0",
     "host": {
@@ -44,7 +44,8 @@
         {
             "type": "menu",
             "label": "Style to Text",
-            "commandId": "styleToTextCommand"
+            "commandId": "styleToTextCommand",
+            "shortcut": { "mac": "Cmd+Shift+D", "win": "Ctrl+Shift+D" }
         }
     ]
 }

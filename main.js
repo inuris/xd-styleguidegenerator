@@ -1,26 +1,8 @@
 const { Text, Color } = require("scenegraph");
 
 function styleToTextHandlerFunction(selection) {
-
-    // create a new Text node
-    const node = new Text();
-
-    // assign some text
-    node.text = "This is some red text";
-
-    // Assign red to the text -- note that we
-    // get the length of the text.
-    node.styleRanges = [{
-        length: node.text.length,
-        fill: new Color("#FF0000"),
-        fontSize: 24
-    }];
-
-    // add the text node to the scenegraph
-    selection.insertionParent.addChild(node);
-
-    // position te text node
-    node.moveInParentCoordinates(20, 50);
+    const textData = selection.items[0];
+    selection.items[0].text = `${textData.fontFamily} ${textData.fontStyle} ${textData.fontSize}px`;
 }
 
 function createRainbowTextHandlerFunction(selection) {
