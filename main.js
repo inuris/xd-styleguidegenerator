@@ -1,7 +1,6 @@
 const { Text, Color } = require("scenegraph");
 
-    
-function styleToTextHandlerFunction(selection) {
+function styleToText(selection) {
     let node = selection.items[0];
     // let assets = require("assets");
     // let allCharacterStyles = assets.characterStyles.get();
@@ -26,10 +25,17 @@ function styleToTextHandlerFunction(selection) {
     //         text.moveInParentCoordinates(0, 100 * count++);
     //     }
     // }
-    if (node.text.indexOf(" ")>0)
-        node.text = node.text.substring(0,node.text.indexOf(" "));
+    console.log(node);
+    if (node.text.indexOf(" - ")>0)
+        node.text = node.text.substring(0,node.text.indexOf(" - "));
     node.text+= ` - ${node.fontFamily} ${node.fontStyle} ${node.fontSize}px`;
 }
+
+function arrangeLayers(selection){
+    let node = selection.items;
+    console.log(node);
+}
+
 function printStyle(selection, currentStyle){
     let text = new Text();
     text.text = `${currentStyle.fontFamily} ${currentStyle.fontStyle} ${currentStyle.fontSize}px`;
@@ -75,6 +81,7 @@ function createRainbowTextHandlerFunction(selection) {
 
 module.exports = {
     commands: {
-        "styleToTextCommand": styleToTextHandlerFunction
+        "styleToText": styleToText,
+        "arrangeLayers": arrangeLayers
     }
 };

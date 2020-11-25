@@ -1,51 +1,55 @@
 {
-    "id": "f5ee2e9c",
-    "name": "Style Guide Generator",
-    "version": "1.0.0",
-    "host": {
-        "app": "XD",
-        "minVersion": "13.0"
-    },
-    "description": "Style Guide Generator",
-    "summary": "Style Guide Generator",
-    "languages": [
-        "en"
-    ],
-    "author": "KhoaLam",
-    "helpUrl": "https://cofixel.com",
-    "icons": [
-        {
-            "width": 24,
-            "height": 24,
-            "path": "images/icon@1x.png"
-        },
-        {
-            "width": 48,
-            "height": 48,
-            "path": "images/icon@2x.png"
-        },
-        {
-            "width": 96,
-            "height": 96,
-            "path": "images/icon@3x.png"
-        },
-        {
-            "width": 144,
-            "height": 144,
-            "path": "images/icon@4x.png"
-        },
-        {
-            "width": 192,
-            "height": 192,
-            "path": "images/icon@5x.png"
-        }
-    ],
-    "uiEntryPoints": [
-        {
-            "type": "menu",
-            "label": "Style to Text",
-            "commandId": "styleToTextCommand",
-            "shortcut": { "mac": "Cmd+Shift+D", "win": "Ctrl+Shift+D" }
-        }
-    ]
+	"id": "f5ee2e9c",
+	"name": "Style Guide Generator",
+	"version": "1.0.0",
+	"host": {
+		"app": "XD",
+		"minVersion": "13.0"
+	},
+	"description": "Ctrl+Shift+D to generate Font Name",
+	"summary": "Style Guide Generator",
+	"languages": [ "en" ],
+	"author": "KhoaLam",
+	"helpUrl": "https://cofixel.com",
+	"icons": [
+		{
+			"width": 24,
+			"height": 24,
+			"path": "images/icon@1x.png"
+		},
+		{
+			"width": 48,
+			"height": 48,
+			"path": "images/icon@2x.png"
+		},
+		{
+			"width": 96,
+			"height": 96,
+			"path": "images/icon@3x.png"
+		},
+		{
+			"width": 144,
+			"height": 144,
+			"path": "images/icon@4x.png"
+		},
+		{
+			"width": 192,
+			"height": 192,
+			"path": "images/icon@5x.png"
+		}
+	],
+	"uiEntryPoints": [
+		{
+			"type": "menu",
+			"label": "Style to Text",
+			"commandId": "styleToText",
+			"shortcut": { "mac": "Cmd+Shift+D", "win": "Ctrl+Shift+D" }
+		},
+		{
+			"type": "menu",
+			"label": "Arrange Layers",
+			"commandId": "arrangeLayers",
+			"shortcut": { "mac": "Cmd+Shift+X", "win": "Ctrl+Shift+X" }
+		}
+	]
 }
