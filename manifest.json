@@ -50,6 +50,12 @@
 			"label": "Arrange Layers",
 			"commandId": "arrangeLayers",
 			"shortcut": { "mac": "Cmd+Shift+X", "win": "Ctrl+Shift+X" }
+		},
+		{
+			"type": "menu",
+			"label": "Remove Decimal Numbers",
+			"commandId": "removeDecimalNumbers",
+			"shortcut": { "mac": "Cmd+Shift+Q", "win": "Ctrl+Shift+Q" }
 		}
 	]
 }

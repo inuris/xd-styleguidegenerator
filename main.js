@@ -78,10 +78,47 @@ function createRainbowTextHandlerFunction(selection) {
     selection.insertionParent.addChild(node);
     node.moveInParentCoordinates(20, 50);
 }
+function removeDecimalNumbers({
+    items
+}) {
+    if (items.length > 0) {
+        items.forEach(item => {
+            // Get item's coords and bounds
+            console.log(item);
+            const {
+                width,
+                height
+            } = item.localBounds;
+            const {
+                x,
+                y
+            } = item.topLeftInParent;
+            console.log("width, height, x, y = ",width, height, x, y)
+            // Round the Item's width and height
+            const newWidth = Math.floor(width);
+            const newHeight = Math.floor(height);
+            item.resize(newWidth, newHeight);
+
+            // Round the Item's X/Y positions
+            const newX = x - Math.floor(x);
+            const newY = y - Math.floor(y);
+            console.log("newWidth, newHeight, newX, newY = ",newWidth, newHeight, newX, newY)
+            item.moveInParentCoordinates(-newX,-newY);
+            console.log("===========================================");
+        });
+    }
+}
+
 
 module.exports = {
     commands: {
-        "styleToText": styleToText,
-        "arrangeLayers": arrangeLayers
+        removeDecimalNumbers: removeDecimalNumbers
+    }
+};
+module.exports = {
+    commands: {
+        styleToText: styleToText,
+        arrangeLayers: arrangeLayers,
+        removeDecimalNumbers: removeDecimalNumbers
     }
 };
