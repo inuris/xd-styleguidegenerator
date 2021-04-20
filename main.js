@@ -103,9 +103,11 @@ function styleToText(selection) {
     //     }
     // }
     console.log(node);
+    console.log(node.lineSpacing);
+    let lineHeight = Math.round((node.lineSpacing/node.fontSize)*1000)/1000;;
     if (node.text.indexOf(" - ")>0)
         node.text = node.text.substring(0,node.text.indexOf(" - "));
-    node.text+= ` - ${node.fontFamily} ${node.fontStyle} ${node.fontSize}px`;
+    node.text+= ` - ${node.fontFamily} ${node.fontStyle} ${node.fontSize}px / line-height: ${lineHeight}`;
 }
 
 function arrangeLayers(selection){
