@@ -1,4 +1,81 @@
+const { selection } = require("scenegraph")
+let panel;
+
 const { Text, Color } = require("scenegraph");
+
+function create() {
+    const HTML =
+        `<style>
+            .break {
+                flex-wrap: wrap;
+            }
+            label.row > span {
+                color: #8E8E8E;
+                width: 20px;
+                text-align: right;
+                font-size: 9px;
+            }
+            label.row input {
+                flex: 1 1 auto;
+            }
+            .show {
+                display: block;
+            }
+            .hide {
+                display: none;
+            }
+        </style>
+        <form method="dialog" id="main">
+            <div class="row break">
+                <label class="row">
+                    <span>↕︎</span>
+                    <input type="number" uxp-quiet="true" id="txtV" value="10" placeholder="Height" />
+                </label>
+                <label class="row">
+                    <span>↔︎</span>
+                    <input type="number" uxp-quiet="true" id="txtH" value="10" placeholder="Width" />
+                </label>
+            </div>
+            <footer><button id="ok" type="submit" uxp-variant="cta">Apply</button></footer>
+        </form>
+        <p id="warning">This plugin requires you to select a rectangle in the document. Please select a rectangle.</p>
+        `
+    function increaseRectangleSize() {
+        const { editDocument } = require("application");
+        const height = Number(document.querySelector("#txtV").value);
+        const width = Number(document.querySelector("#txtH").value);
+
+        editDocument({ editLabel: "Increase rectangle size" }, function (selection) {
+            const selectedRectangle = selection.items[0];
+            selectedRectangle.width += width
+            selectedRectangle.height += height
+        })
+    }
+
+    panel = document.createElement("div");
+    panel.innerHTML = HTML;
+    panel.querySelector("form").addEventListener("submit", increaseRectangleSize);
+
+    return panel;
+}
+
+function show(event) {
+    if (!panel) event.node.appendChild(create());
+}
+
+function update() {
+    const { Rectangle } = require("scenegraph");
+    let form = document.querySelector("form");
+    let warning = document.querySelector("#warning");
+    if (!selection || !(selection.items[0] instanceof Rectangle)) {
+        form.className = "hide";
+        warning.className = "show";
+    } else {
+        form.className = "show";
+        warning.className = "hide";
+    }
+}
+
 
 function styleToText(selection) {
     let node = selection.items[0];
@@ -36,48 +113,6 @@ function arrangeLayers(selection){
     console.log(node);
 }
 
-function printStyle(selection, currentStyle){
-    let text = new Text();
-    text.text = `${currentStyle.fontFamily} ${currentStyle.fontStyle} ${currentStyle.fontSize}px`;
-    // text.styleRanges = [
-    //     {
-    //         length: text.text.length,
-    //         fill: new Color("gray"),
-    //         fontSize: 20
-    //     }
-    // ];
-    selection.insertionParent.addChild(text);
-    text.moveInParentCoordinates(0, 100 * i);
-}
-function createRainbowTextHandlerFunction(selection) {
-
-    const node = new Text();
-
-    const textData = [
-        { text: "This ", color: "red" },
-        { text: "is ", color: "orange" },
-        { text: "some ", color: "yellow" },
-        { text: "ra", color: "green" },
-        { text: "in", color: "blue" },
-        { text: "bow ", color: "indigo" },
-        { text: "text", color: "violet" }
-    ];
-
-    node.text = textData.map(item => item.text).join("");
-
-    // styleRange is an array of styles, and `length`
-    // determines how far into the text each style applies.
-    // A length of 1 means the style applies to one
-    // character.
-    node.styleRanges = textData.map(item => ({
-        length: item.text.length,
-        fill: new Color(item.color),
-        fontSize: 24
-    }));
-
-    selection.insertionParent.addChild(node);
-    node.moveInParentCoordinates(20, 50);
-}
 function removeDecimalNumbers({
     items
 }) {
@@ -109,13 +144,7 @@ function removeDecimalNumbers({
     }
 }
 
-
-module.exports = {
-    commands: {
-        removeDecimalNumbers: removeDecimalNumbers
-    }
-};
-module.exports = {
+module.exports = {    
     commands: {
         styleToText: styleToText,
         arrangeLayers: arrangeLayers,

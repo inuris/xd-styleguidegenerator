@@ -1,45 +1,27 @@
 {
-	"id": "f5ee2e9c",
-	"name": "Style Guide Generator",
-	"version": "1.0.0",
-	"host": {
-		"app": "XD",
-		"minVersion": "13.0"
-	},
-	"description": "Ctrl+Shift+D to generate Font Name",
-	"summary": "Style Guide Generator",
-	"languages": [ "en" ],
-	"author": "KhoaLam",
-	"helpUrl": "https://cofixel.com",
-	"icons": [
-		{
-			"width": 24,
-			"height": 24,
-			"path": "images/icon@1x.png"
-		},
-		{
-			"width": 48,
-			"height": 48,
-			"path": "images/icon@2x.png"
-		},
-		{
-			"width": 96,
-			"height": 96,
-			"path": "images/icon@3x.png"
-		},
-		{
-			"width": 144,
-			"height": 144,
-			"path": "images/icon@4x.png"
-		},
-		{
-			"width": 192,
-			"height": 192,
-			"path": "images/icon@5x.png"
-		}
-	],
-	"uiEntryPoints": [
-		{
+  "id": "39d6d951",
+  "name": "Style Guide Generator",
+  "host": [
+    {
+      "app": "XD",
+      "minVersion": "22"
+    }
+  ],
+  "version": "1",
+  "icons": [
+    {
+      "width": 24,
+      "height": 24,
+      "path": "images/icon@1x.png"
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "path": "images/icon@2x.png"
+    }
+  ],
+  "uiEntryPoints": [    
+    {
 			"type": "menu",
 			"label": "Style to Text",
 			"commandId": "styleToText",
@@ -57,5 +39,5 @@
 			"commandId": "removeDecimalNumbers",
 			"shortcut": { "mac": "Cmd+Shift+Q", "win": "Ctrl+Shift+Q" }
 		}
-	]
+  ]
 }
