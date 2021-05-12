@@ -77,11 +77,23 @@ function update() {
 }
 
 
-function styleToText(selection) {
-    let node = selection.items[0];
-    // let assets = require("assets");
-    // let allCharacterStyles = assets.characterStyles.get();
-    // let count = 0; 
+function styleToText(selection) {    
+    for (let i = 0;i<selection.items.length;i++){
+        let node = selection.items[i];
+        console.log(node.lineSpacing);
+        let lineHeight = Math.round((node.lineSpacing/node.fontSize)*1000)/1000;;
+        if (node.text.indexOf(" - ")>0)
+            node.text = node.text.substring(0,node.text.indexOf(" - "));
+        node.text+= ` - ${node.fontFamily} ${node.fontStyle} ${node.fontSize}px / line-height: ${lineHeight} (${node.lineSpacing}px)`;
+    }
+    
+}
+
+function arrangeLayers(selection){
+    let assets = require("assets");
+    let allCharacterStyles = assets.characterStyles.get();
+    let count = 0; 
+    console.log(allCharacterStyles);
     // for (let i=0;i<allCharacterStyles.length;i++){        
     //     let characterStyle = allCharacterStyles[i];
     //     if (characterStyle.name.indexOf('@') === 0){ 
@@ -102,17 +114,6 @@ function styleToText(selection) {
     //         text.moveInParentCoordinates(0, 100 * count++);
     //     }
     // }
-    console.log(node);
-    console.log(node.lineSpacing);
-    let lineHeight = Math.round((node.lineSpacing/node.fontSize)*1000)/1000;;
-    if (node.text.indexOf(" - ")>0)
-        node.text = node.text.substring(0,node.text.indexOf(" - "));
-    node.text+= ` - ${node.fontFamily} ${node.fontStyle} ${node.fontSize}px / line-height: ${lineHeight}`;
-}
-
-function arrangeLayers(selection){
-    let node = selection.items;
-    console.log(node);
 }
 
 function removeDecimalNumbers({
