@@ -77,22 +77,45 @@ function update() {
 }
 
 
-function styleToText(selection) {    
-    for (let i = 0;i<selection.items.length;i++){
+function styleToText(selection) {
+    for (let i = 0; i < selection.items.length; i++) {
         let node = selection.items[i];
-        console.log(node.lineSpacing);
-        let lineHeight = Math.round((node.lineSpacing/node.fontSize)*1000)/1000;;
-        if (node.text.indexOf(" - ")>0)
-            node.text = node.text.substring(0,node.text.indexOf(" - "));
-        node.text+= ` - ${node.fontFamily} ${node.fontStyle} ${node.fontSize}px / line-height: ${lineHeight} (${node.lineSpacing}px)`;
+
+        let lineHeight = Math.round((node.lineSpacing / node.fontSize) * 1000) / 1000;
+        let letterSpacing = node.fontSize * node.charSpacing / 1000;
+
+        if (node.text.lastIndexOf(" - ")>0)
+            node.text = node.text.substring(0,node.text.lastIndexOf(" - "));
+
+        node.text+= ` - ${node.fontFamily} ${node.fontStyle} ${node.fontSize}px / line-height: ${lineHeight} / letter-spacing: ${letterSpacing}`;       
+
+        // if (node.text.indexOf(String.fromCharCode(13)) > 0){
+        //     node.text = node.text.substring(0, node.text.indexOf(String.fromCharCode(13)));
+        // }
+            
+        // let css = new Text();
+        // css.styleRanges= [{
+        //     fill: new Color("black"),
+        //     fontFamily: "Consolas",
+        //     fontSize: 14,
+        //     fontStyle: "Regular"            
+        // }];
+        // css.text = 'font: ' + node.fontFamily + ' ' + node.fontStyle + ';' + String.fromCharCode(13) +
+        // 'font-size: ' + node.fontSize + 'px;' + String.fromCharCode(13) +
+        // 'line-height: ' + lineHeight + ';' + String.fromCharCode(13) +
+        // 'letter-spacing: ' + letterSpacing + 'px;';
+        // console.log(node.parent);
+        // selection.insertionParent.addChild(css);
+        // css.moveInParentCoordinates(0,0);
+        // console.log(css);
     }
-    
+
 }
 
-function arrangeLayers(selection){
+function arrangeLayers(selection) {
     let assets = require("assets");
     let allCharacterStyles = assets.characterStyles.get();
-    let count = 0; 
+    let count = 0;
     console.log(allCharacterStyles);
     // for (let i=0;i<allCharacterStyles.length;i++){        
     //     let characterStyle = allCharacterStyles[i];
@@ -131,7 +154,7 @@ function removeDecimalNumbers({
                 x,
                 y
             } = item.topLeftInParent;
-            console.log("width, height, x, y = ",width, height, x, y)
+            console.log("width, height, x, y = ", width, height, x, y)
             // Round the Item's width and height
             const newWidth = Math.floor(width);
             const newHeight = Math.floor(height);
@@ -140,14 +163,14 @@ function removeDecimalNumbers({
             // Round the Item's X/Y positions
             const newX = x - Math.floor(x);
             const newY = y - Math.floor(y);
-            console.log("newWidth, newHeight, newX, newY = ",newWidth, newHeight, newX, newY)
-            item.moveInParentCoordinates(-newX,-newY);
+            console.log("newWidth, newHeight, newX, newY = ", newWidth, newHeight, newX, newY)
+            item.moveInParentCoordinates(-newX, -newY);
             console.log("===========================================");
         });
     }
 }
 
-module.exports = {    
+module.exports = {
     commands: {
         styleToText: styleToText,
         arrangeLayers: arrangeLayers,
